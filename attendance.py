@@ -57,22 +57,18 @@ def mark_absent(student_ids):
 def get_report(**kwargs):
     """Generate attendance report with optional filters."""
     report = {}
-    present = False
-    absent = False
     # implement logic
     for key, value in kwargs.items():
         if value == True:
             for student, record in attendance.items():
                 if "present_days" in record:
                     if key == "only_present":
-                        present = True
                         if student in report:
                                 report[student].update({"present_days": record["present_days"]})
                         else:
                             report.update({student: {"present_days": record["present_days"]}})
                 if "absent_days" in record:
                     if key == "only_absent":
-                        absent = True
                         if student in report:
                                 report[student].update({"absent_days": record["absent_days"]})
                         else:
