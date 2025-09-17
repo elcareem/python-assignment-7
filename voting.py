@@ -22,11 +22,19 @@ def register_candidates(*args, **kwargs):
     """Register candidates with optional metadata.
     """
     if len(args) >= 1 and len(kwargs) == 0:
+    
         for name in args:
-            if name not in candidates:
+            exist = False
+            if candidates:
+                for candidate in candidates.values():
+                    if candidate["candidate_name"] == name:
+                        exist = True
+
+            if not exist:
                 candidates.update({len(candidates) + 1: {"candidate_name": name}})
             else:
-                print("Candidate already exists")
+                print(f"Candidate {name} already exist") 
+
 
     elif len(args) == 1 and len(kwargs) >= 1:
         name = args[0]        
@@ -88,3 +96,8 @@ def election_result():
 
     return {"winners": winners, "candidates": candidates}
 
+
+
+register_candidates("John", "Jane", "Joy", "Jane", "Hadiza", "Tamuno", "John", "Hadiza")
+
+print(candidates)
